@@ -1,0 +1,95 @@
+$(document).ready(function() {
+  //create a timer that counts down each question 30 seconds
+  // start screen with button to start game
+
+  var question = [
+    "What kind of pet does Harry take to school?",
+    "What position does Harry play on the quidditch team?",
+    "Which of the following was not a pet of Hagrid's"
+  ];
+
+  var answersA = ["frog", "Seeker", "Nobert"];
+  var answersB = ["Cat", "Chaser", "Chester"];
+  var answersC = ["Owl", "Beater", "Fang"];
+  var answersD = ["Snake", "Bludger", "Buckbeak"];
+
+  var correctAnswer = ["Owl", "Seeker", "Chester"];
+
+  function startGame() {
+    $("#t").hide();
+    $("#question").hide();
+    $("#a").html("start");
+    $("#b").hide();
+    $("#c").hide();
+    $("#d").hide();
+  }
+
+  $("#a").on("click", function() {
+    //write code to begin timer
+    //for loop to display question and buttons that correlate
+    for (var i = 0; i < 1; i++) {
+      $("#question").replaceWith(question[i]);
+      $("#b").show();
+      $("#c").show();
+      $("#d").show();
+      $("#a").html(answersA[i]);
+      $("#b").html(answersB[i]);
+      $("#c").html(answersC[i]);
+      $("#d").html(answersD[i]);
+    }
+
+    $("#a").on("click", function() {
+      if ("#a" === correctAnswer[i]) {
+        console.log("yes!");
+        correct();
+      } else {
+        console.log("no!");
+        wrong();
+      }
+    });
+
+    $("#b").on("click", function() {
+      if ("#b" === correctAnswer[i]) {
+        console.log("yes!");
+        correct();
+      } else {
+        console.log("no!");
+        wrong();
+      }
+    });
+
+    $("#c").on("click", function() {
+      if ("#c" === correctAnswer[i]) {
+        console.log("yes!");
+        correct();
+      } else {
+        console.log("no!");
+        wrong();
+      }
+    });
+
+    $("#d").on("click", function() {
+      if ("#d" === correctAnswer[i]) {
+        console.log("yes!");
+        correct();
+      } else {
+        console.log("no!");
+        wrong();
+      }
+    });
+
+    function correct() {
+      $("#question").text("CORRECT!");
+      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    }
+  
+    function wrong() {
+      $("#question").text("Nope!  The correct answer was" + correctAnswer[i]).attr("display", "block");
+      // $("#prompt").text("Nope!  The correct answer was...");
+      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    }
+  });
+  // });
+
+  startGame();
+});

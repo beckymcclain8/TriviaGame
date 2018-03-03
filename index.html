@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="assets/css/reset.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    
+    <title>Harry Potter Trivia</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Harry Potter Trivia!</h1>
+
+                <h3>Click the correct answer to move on to the next question...</h3>
+                <h3>Be careful, there's not much time!</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="time">
+                    <p id="t">Time Remaining: <span id="timer"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="box">
+            <div class="col-12">
+                <div id="question"></div>
+                <div id="prompt"></div>
+                <br>
+                <div id="answers">
+                    <button type="button" id= "a" class="btn btn-outline-primary"></button>
+                    <button type="button" id= "b" class="btn btn-outline-secondary"></button>
+                    <button type="button" id= "c" class="btn btn-outline-success"></button>
+                    <button type="button" id= "d" class="btn btn-outline-danger"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
