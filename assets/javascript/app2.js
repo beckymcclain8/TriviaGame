@@ -1,6 +1,9 @@
 $(document).ready(function() {
-  // var userGuess;
-  var currentQuestion = 0;
+  var userGuess;
+  var questionNumber = 0;
+  var correct = 0;
+  var wrong = 0;
+  var timedOut = 0;
 
   currentQuestion = [
     {
@@ -30,8 +33,6 @@ $(document).ready(function() {
   }
 
   $("#a").on("click", function() {
-    //write code to begin timer
-
     $("#t").show();
     $("#timer").show();
     countdown();
@@ -46,38 +47,31 @@ $(document).ready(function() {
     $("#d").html(currentQuestion[0].options[3]);
 
     $("#a").on("click", function() {
-      userGuess = (currentQuestion[0].options[0]);
-      stopTimer();
-      checkWin();
-      currentQuestion++;
+      userGuess = currentQuestion[0].options[0];
+       checkWin();
     });
 
     $("#b").on("click", function() {
-      userGuess = (currentQuestion[0].options[1]);
-      stopTimer();
-      checkWin();
-      currentQuestion++;
+      userGuess = currentQuestion[0].options[1];
+         checkWin();
     });
 
     $("#c").on("click", function() {
-      userGuess = (currentQuestion[0].options[2]);
-      stopTimer();
+      userGuess = currentQuestion[0].options[2];
       checkWin();
-      currentQuestion++;
     });
 
     $("#d").on("click", function() {
-      userGuess = (currentQuestion[0].options[3]);
-      stopTimer();
+      userGuess = currentQuestion[0].options[3];
       checkWin();
-      currentQuestion++;
     });
   });
 
   startGame();
+  // setTimeout(checkWin, 5000);
+
   var timeLeft = 10;
   var elem = document.getElementById("timer");
-
   var timerId = setInterval(countdown, 1000);
 
   function countdown() {
@@ -96,7 +90,8 @@ $(document).ready(function() {
         currentQuestion[0].correct +
         "!"
     );
-    $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    timedOut++;
   }
 
   function stopTimer() {
@@ -105,16 +100,66 @@ $(document).ready(function() {
   }
 
   function checkWin() {
-    // function fiveSeconds(){
+    clearInterval(timerId);
+    stopTimer();
     if (userGuess === currentQuestion[0].correct) {
       $("#question").text("CORRECT!");
-      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+      $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+      questionNumber++;
+      correct++;
+      nextQuestion();
     } else {
       $("#question").text(
         "Nope!  The correct answer was " + currentQuestion[0].correct + "!"
       );
-      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+      $("#img").html('<img src="assets/images/Hedwig.jpg"/>');
+      questionNumber++;
+      wrong++;
+      nextQuestion();
     }
-    // setTimeout(fiveSeconds, 1000 *5);
+    console.log("correct" + correct)
+    console.log("wrong" + wrong);
+    console.log("questionNumber" + questionNumber);
+  }
+  
+
+  function nextQuestion() {
+    if (questionNumber < 3) {
+      $("#t").show();
+      $("#timer").show();
+      countdown();
+      $("#question").show();
+      for (i = 0; i < 3; i++) {
+        $("#question").text(currentQuestion[i].question);
+        $("#answers")
+        $("#b").show();
+        $("#c").show();
+        $("#d").show();
+        $("#a").html(currentQuestion[i].options[0]);
+        $("#b").html(currentQuestion[i].options[1]);
+        $("#c").html(currentQuestion[i].options[2]);
+        $("#d").html(currentQuestion[i].options[3]);
+      }
+    } else {
+      results();
+    }
+  }
+
+  function results() {
+    $("#results").html(
+      "<p>Total Correct:" +
+        correct +
+        "</p>" +
+        "<br>" +
+        "<p>Total Wrong:" +
+        wrong +
+        "</p>" +
+        "<br>" +
+        "<p>Ran out of time on:" +
+        timedOut +
+        "</p>" +
+        "<br>" +
+        "<div>'restart button'</div>"
+    );
   }
 });
