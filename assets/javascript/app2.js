@@ -1,7 +1,6 @@
 $(document).ready(function() {
-
-var userGuess;
-var currentQuestion = 0;
+  // var userGuess;
+  var currentQuestion = 0;
 
   currentQuestion = [
     {
@@ -32,11 +31,12 @@ var currentQuestion = 0;
 
   $("#a").on("click", function() {
     //write code to begin timer
-    //for loop to display question and buttons that correlate
+
     $("#t").show();
-    // countdown();
+    $("#timer").show();
+    countdown();
     $("#question").show();
-    $("#question").replaceWith(currentQuestion[0].question);
+    $("#question").text(currentQuestion[0].question);
     $("#b").show();
     $("#c").show();
     $("#d").show();
@@ -45,55 +45,76 @@ var currentQuestion = 0;
     $("#c").html(currentQuestion[0].options[2]);
     $("#d").html(currentQuestion[0].options[3]);
 
-    $("body").on("click", function() {
-      userGuess = $("this").text()
+    $("#a").on("click", function() {
+      userGuess = (currentQuestion[0].options[0]);
       stopTimer();
       checkWin();
-    })
-    })
-    
+      currentQuestion++;
+    });
 
+    $("#b").on("click", function() {
+      userGuess = (currentQuestion[0].options[1]);
+      stopTimer();
+      checkWin();
+      currentQuestion++;
+    });
 
-startGame();
-var timeLeft = 10;
-var elem = document.getElementById("timer");
+    $("#c").on("click", function() {
+      userGuess = (currentQuestion[0].options[2]);
+      stopTimer();
+      checkWin();
+      currentQuestion++;
+    });
 
-var timerId = setInterval(countdown, 1000);
+    $("#d").on("click", function() {
+      userGuess = (currentQuestion[0].options[3]);
+      stopTimer();
+      checkWin();
+      currentQuestion++;
+    });
+  });
 
-function countdown() {
-  if (timeLeft == 0) {
-    clearTimeout(timerId);
-    ranOutOfTime();
-  } else {
-    elem.innerHTML = timeLeft + " seconds remaining";
-    timeLeft--;
+  startGame();
+  var timeLeft = 10;
+  var elem = document.getElementById("timer");
+
+  var timerId = setInterval(countdown, 1000);
+
+  function countdown() {
+    if (timeLeft == 0) {
+      clearTimeout(timerId);
+      ranOutOfTime();
+    } else {
+      elem.innerHTML = timeLeft + " seconds remaining";
+      timeLeft--;
+    }
   }
-}
 
-function ranOutOfTime () {
-  $("#question").text("Sorry, you ran out of time!  The correct answer was " + currentQuestion.correct + " !");
-  $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
-}
-
-function stopTimer() {
-  $("#t").hide();
-  $("#timer").hide();
-}
-
-function checkWin() {
-function fiveSeconds(){
-  if (userGuess = currentQuestion.correct) {
-    $("#question").text("CORRECT!");
+  function ranOutOfTime() {
+    $("#question").text(
+      "Sorry, you ran out of time!  The correct answer was " +
+        currentQuestion[0].correct +
+        "!"
+    );
     $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
-    currentQuestion++;
-  } else
-  {
-    $("#question").text("Nope!  The correct answer was " + currentQuestion[i].correct + " !")
-    $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
-    currentQuestions++;
   }
-  setTimeout(fiveSeconds, 1000 *5);
-};
 
-}
+  function stopTimer() {
+    $("#t").hide();
+    $("#timer").hide();
+  }
+
+  function checkWin() {
+    // function fiveSeconds(){
+    if (userGuess === currentQuestion[0].correct) {
+      $("#question").text("CORRECT!");
+      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    } else {
+      $("#question").text(
+        "Nope!  The correct answer was " + currentQuestion[0].correct + "!"
+      );
+      $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    }
+    // setTimeout(fiveSeconds, 1000 *5);
+  }
 });
