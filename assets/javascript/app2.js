@@ -1,22 +1,23 @@
 $(document).ready(function() {
 
+var userGuess;
+var currentQuestion = 0;
 
-
-  var currentQuestion = [
+  currentQuestion = [
     {
       question: "What kind of pet does Harry take to school?",
       options: ["Frog", "Cat", "Owl", "Snake"],
-      correct: 3
+      correct: "Owl"
     },
     {
       question: "What position does Harry play on the quidditch team?",
       options: ["Seeker", "Chaser", "Beater", "Bludger"],
-      correct: 1
+      correct: "Seeker"
     },
     {
       question: "Which of the following was not a pet of Hagrid's",
       options: ["Norbert", "Chester", "Fang", "Buckbeak"],
-      correct: 2
+      correct: "Chester"
     }
   ];
 
@@ -44,11 +45,14 @@ $(document).ready(function() {
     $("#c").html(currentQuestion[0].options[2]);
     $("#d").html(currentQuestion[0].options[3]);
 
-    $("#a").on("click", function() {
-      
-    }
+    $("body").on("click", function() {
+      userGuess = $("this").text()
+      stopTimer();
+      checkWin();
+    })
+    })
     
-});
+
 
 startGame();
 var timeLeft = 10;
@@ -66,4 +70,30 @@ function countdown() {
   }
 }
 
-})
+function ranOutOfTime () {
+  $("#question").text("Sorry, you ran out of time!  The correct answer was " + currentQuestion.correct + " !");
+  $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+}
+
+function stopTimer() {
+  $("#t").hide();
+  $("#timer").hide();
+}
+
+function checkWin() {
+function fiveSeconds(){
+  if (userGuess = currentQuestion.correct) {
+    $("#question").text("CORRECT!");
+    $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    currentQuestion++;
+  } else
+  {
+    $("#question").text("Nope!  The correct answer was " + currentQuestion[i].correct + " !")
+    $("#answers").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    currentQuestions++;
+  }
+  setTimeout(fiveSeconds, 1000 *5);
+};
+
+}
+});
