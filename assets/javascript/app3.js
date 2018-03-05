@@ -9,18 +9,63 @@ $(document).ready(function() {
     {
       question: "What kind of pet does Harry take to school?",
       options: ["Frog", "Cat", "Owl", "Snake"],
-      correct: "Owl"
+      correct: "Owl",
+      img: "<img src='assets/images/Hedwig.jpg'/>"
     },
     {
       question: "What position does Harry play on the quidditch team?",
       options: ["Seeker", "Chaser", "Beater", "Bludger"],
-      correct: "Seeker"
+      correct: "Seeker",
+      img: "<img src='assets/images/seeker.png'/>"
     },
     {
       question: "Which of the following was not a pet of Hagrid's",
       options: ["Norbert", "Chester", "Fang", "Buckbeak"],
-      correct: "Chester"
-    }
+      correct: "Chester",
+      img: "<img src='assets/images/buckbeak.jpg'/>"
+    },
+    {
+      question: "What article of clothing frees Dobby from the Malfoys?",
+      options: ["Shirt", "Scarf", "Sock", "Sweater"],
+      correct: "Sock",
+      img: "<img src='assets/images/dobby.jpg'/>"
+    },
+    {
+      question: "Who drives the Knight Bus?",
+      options: ["Bertha Jorkins", "Mundungus Fletcher", "Dedalus Diggle", "Stan Shunpike"],
+      correct: "Stan Shunpike",
+      img: "<img src='assets/images/stan.jpg'/>"
+    },
+    {
+      question: "What kind of drgaon did Harry fight in the Tri-Wizard Tournament?",
+      options: ["Welsh-Green", "Hungarian Horntail", "Swedish Short-Snout", "Chinese Fireball"],
+      correct: "Hungarian Horntail",
+      img: "<img src='assets/images/hungarian.jpg'/>"
+    },
+    {
+      question: "What was James Potter's animagus?",
+      options: ["Stag", "Rat", "Dog", "Cat"],
+      correct: "Stag",
+      img: "<img src='assets/images/prongs.jpg'/>"
+    },
+    {
+      question: "Who was the half-blood prince?",
+      options: ["James Potter", "Albus Dumbledore", "Tom Riddle", "Severus Snape"],
+      correct: "Severus Snape",
+      img: "<img src='assets/images/snape.jpg'/>"
+    },
+    {
+      question: "What newspaper does Luna Lovegood's dad edit?",
+      options: ["The Muggle Mornings", "The Daily Prophet", "The Quibbler", "Diagon Alley News"],
+      correct: "The Quibbler",
+      img: "<img src='assets/images/quibbler.jpg'/>"
+    },
+    {
+      question: "Which of the following is not a Weasley?",
+      options: ["Frank", "Molly", "Bill", "Charlie"],
+      correct: "Frank",
+      img: "<img src='assets/images/weasley.jpg'/>"
+    },
   ];
 
   function startGame() {
@@ -31,6 +76,7 @@ $(document).ready(function() {
     $("#b").hide();
     $("#c").hide();
     $("#d").hide();
+    clearInterval(timerId);
   }
 
   $("#start").on("click", function() {
@@ -102,12 +148,16 @@ $(document).ready(function() {
 
  
   function ranOutOfTime() {
+    $("#a").hide();
+    $("#b").hide();
+    $("#c").hide();
+    $("#d").hide();
     $("#question").text(
       "Sorry, you ran out of time!  The correct answer was " +
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber;
     timedOut++;
     setTimeout(nextQuestion, 4000);
@@ -119,20 +169,28 @@ $(document).ready(function() {
   }
 
   function correct() {
+    $("#a").hide();
+    $("#b").hide();
+    $("#c").hide();
+    $("#d").hide();
     $("#question").text("CORRECT!");
-    $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
     right++;
     setTimeout(nextQuestion, 4000);
   }
 
   function incorrect() {
+    $("#a").hide();
+    $("#b").hide();
+    $("#c").hide();
+    $("#d").hide();
     $("#question").text(
       "Nope!  The correct answer was " +
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#img").html('<img src="assets/images/Hedwig.jpg"/>');
+    $("#img").html(currentQuestion[questionNumber].img);
     questionNumber++;
     wrong++;
     setTimeout(nextQuestion, 4000);
@@ -142,13 +200,14 @@ $(document).ready(function() {
   // console.log("questionNumber" + questionNumber);
 
   function nextQuestion() {
-    if (questionNumber < 3) {
+    if (questionNumber < 10) {
+      $("#img").hide();
       $("#t").show();
       $("#timer").show();
-      timeLeft = 10;
+      timeLeft = 3;
       countdown();
       $("#question").show();
-      for (i = 0; i < 3; i++) {
+      for (i = 0; i < 10; i++) {
         
         $("#question").text(currentQuestion[questionNumber].question);
         $("#answers");
