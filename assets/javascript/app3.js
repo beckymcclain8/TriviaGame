@@ -32,13 +32,24 @@ $(document).ready(function() {
     },
     {
       question: "Who drives the Knight Bus?",
-      options: ["Bertha Jorkins", "Mundungus Fletcher", "Dedalus Diggle", "Stan Shunpike"],
+      options: [
+        "Bertha Jorkins",
+        "Mundungus Fletcher",
+        "Dedalus Diggle",
+        "Stan Shunpike"
+      ],
       correct: "Stan Shunpike",
       img: "<img src='assets/images/stan.jpg'/>"
     },
     {
-      question: "What kind of drgaon did Harry fight in the Tri-Wizard Tournament?",
-      options: ["Welsh-Green", "Hungarian Horntail", "Swedish Short-Snout", "Chinese Fireball"],
+      question:
+        "What kind of drgaon did Harry fight in the Tri-Wizard Tournament?",
+      options: [
+        "Welsh-Green",
+        "Hungarian Horntail",
+        "Swedish Short-Snout",
+        "Chinese Fireball"
+      ],
       correct: "Hungarian Horntail",
       img: "<img src='assets/images/hungarian.jpg'/>"
     },
@@ -50,13 +61,23 @@ $(document).ready(function() {
     },
     {
       question: "Who was the half-blood prince?",
-      options: ["James Potter", "Albus Dumbledore", "Tom Riddle", "Severus Snape"],
+      options: [
+        "James Potter",
+        "Albus Dumbledore",
+        "Tom Riddle",
+        "Severus Snape"
+      ],
       correct: "Severus Snape",
       img: "<img src='assets/images/snape.jpg'/>"
     },
     {
       question: "What newspaper does Luna Lovegood's dad edit?",
-      options: ["The Muggle Mornings", "The Daily Prophet", "The Quibbler", "Diagon Alley News"],
+      options: [
+        "The Muggle Mornings",
+        "The Daily Prophet",
+        "The Quibbler",
+        "Diagon Alley News"
+      ],
       correct: "The Quibbler",
       img: "<img src='assets/images/quibbler.jpg'/>"
     },
@@ -65,7 +86,7 @@ $(document).ready(function() {
       options: ["Frank", "Molly", "Bill", "Charlie"],
       correct: "Frank",
       img: "<img src='assets/images/weasley.jpg'/>"
-    },
+    }
   ];
 
   function startGame() {
@@ -146,7 +167,6 @@ $(document).ready(function() {
   var elem = document.getElementById("timer");
   var timerId = setInterval(countdown, 1000);
 
- 
   function ranOutOfTime() {
     $("#a").hide();
     $("#b").hide();
@@ -158,7 +178,7 @@ $(document).ready(function() {
         "!"
     );
     $("#img").replaceWith(currentQuestion[questionNumber].img);
-    questionNumber;
+    questionNumber++;
     timedOut++;
     setTimeout(nextQuestion, 4000);
   }
@@ -176,6 +196,7 @@ $(document).ready(function() {
     $("#question").text("CORRECT!");
     $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
+    console.log("correct" + questionNumber)
     right++;
     setTimeout(nextQuestion, 4000);
   }
@@ -191,7 +212,7 @@ $(document).ready(function() {
         "!"
     );
     $("#img").html(currentQuestion[questionNumber].img);
-    questionNumber++;
+    questionNumber ++;
     wrong++;
     setTimeout(nextQuestion, 4000);
   }
@@ -201,6 +222,7 @@ $(document).ready(function() {
 
   function nextQuestion() {
     if (questionNumber < 10) {
+      console.log("nextQuestion" + questionNumber)
       $("#img").hide();
       $("#t").show();
       $("#timer").show();
@@ -208,7 +230,6 @@ $(document).ready(function() {
       countdown();
       $("#question").show();
       for (i = 0; i < 10; i++) {
-        
         $("#question").text(currentQuestion[questionNumber].question);
         $("#answers");
         $("#a").show();
