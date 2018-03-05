@@ -96,20 +96,11 @@ $(document).ready(function() {
 
   // setTimeout(checkWin, 5000);
 
-  var timeLeft = 10;
+  var timeLeft = 3;
   var elem = document.getElementById("timer");
   var timerId = setInterval(countdown, 1000);
 
-  function countdown() {
-    if (timeLeft == 0) {
-      clearTimeout(timerId);
-      ranOutOfTime();
-    } else {
-      elem.innerHTML = timeLeft + " seconds remaining";
-      timeLeft--;
-    }
-  }
-
+ 
   function ranOutOfTime() {
     $("#question").text(
       "Sorry, you ran out of time!  The correct answer was " +
@@ -117,7 +108,9 @@ $(document).ready(function() {
         "!"
     );
     $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
+    questionNumber;
     timedOut++;
+    setTimeout(nextQuestion, 4000);
   }
 
   function stopTimer() {
@@ -130,7 +123,7 @@ $(document).ready(function() {
     $("#img").replaceWith('<img src="assets/images/Hedwig.jpg"/>');
     questionNumber++;
     right++;
-    nextQuestion();
+    setTimeout(nextQuestion, 4000);
   }
 
   function incorrect() {
@@ -142,7 +135,7 @@ $(document).ready(function() {
     $("#img").html('<img src="assets/images/Hedwig.jpg"/>');
     questionNumber++;
     wrong++;
-    // nextQuestion();
+    setTimeout(nextQuestion, 4000);
   }
   // console.log("correct" + correct)
   // console.log("wrong" + wrong);
@@ -152,9 +145,11 @@ $(document).ready(function() {
     if (questionNumber < 3) {
       $("#t").show();
       $("#timer").show();
+      timeLeft = 10;
       countdown();
       $("#question").show();
       for (i = 0; i < 3; i++) {
+        
         $("#question").text(currentQuestion[questionNumber].question);
         $("#answers");
         $("#a").show();
@@ -170,18 +165,33 @@ $(document).ready(function() {
       results();
     }
   }
+  function countdown() {
+    if (timeLeft == 0) {
+      clearTimeout(timerId);
+      ranOutOfTime();
+    } else {
+      elem.innerHTML = timeLeft + " seconds remaining";
+      timeLeft--;
+    }
+  }
 
   function results() {
+    $("#img").hide();
+    $("#question").hide();
+    $("#a").hide();
+    $("#b").hide();
+    $("#c").hide();
+    $("#d").hide();
     $("#results").html(
-      "<p>Total Correct:" +
-        correct +
+      "<p>Total Correct: " +
+        right +
         "</p>" +
         "<br>" +
-        "<p>Total Wrong:" +
+        "<p>Total Wrong: " +
         wrong +
         "</p>" +
         "<br>" +
-        "<p>Ran out of time on:" +
+        "<p>Ran out of time on: " +
         timedOut +
         "</p>" +
         "<br>" +
