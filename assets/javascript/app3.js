@@ -11,25 +11,25 @@ $(document).ready(function() {
       question: "What kind of pet does Harry take to school?",
       options: ["Frog", "Cat", "Owl", "Snake"],
       correct: "Owl",
-      img: "<img id='pic' src='assets/images/Hedwig.jpg'/>"
+      img: "<img id='img' src='assets/images/Hedwig.jpg'/>"
     },
     {
       question: "What position does Harry play on the quidditch team?",
       options: ["Seeker", "Chaser", "Beater", "Bludger"],
       correct: "Seeker",
-      img: "<img id='pic' src='assets/images/seeker.png'/>"
+      img: "<img id='img' src='assets/images/seeker.png'/>"
     },
     {
       question: "Which of the following was not a pet of Hagrid's",
       options: ["Norbert", "Chester", "Fang", "Buckbeak"],
       correct: "Chester",
-      img: "<img id='pic' src='assets/images/buckbeak.jpg'/>"
+      img: "<img id='img' src='assets/images/buckbeak.jpg'/>"
     },
     {
       question: "What article of clothing frees Dobby from the Malfoys?",
       options: ["Shirt", "Scarf", "Sock", "Sweater"],
       correct: "Sock",
-      img: "<img id='pic' src='assets/images/dobby.jpg'/>"
+      img: "<img id='img' src='assets/images/dobby.jpg'/>"
     },
     {
       question: "Who drives the Knight Bus?",
@@ -40,7 +40,7 @@ $(document).ready(function() {
         "Stan Shunpike"
       ],
       correct: "Stan Shunpike",
-      img: "<img id='pic' src='assets/images/stan.jpg'/>"
+      img: "<img id='img' src='assets/images/stan.jpg'/>"
     },
     {
       question:
@@ -52,13 +52,13 @@ $(document).ready(function() {
         "Chinese Fireball"
       ],
       correct: "Hungarian Horntail",
-      img: "<img id='pic' src='assets/images/hungarian.jpg'/>"
+      img: "<img id='img' src='assets/images/hungarian.jpg'/>"
     },
     {
       question: "What was James Potter's animagus?",
       options: ["Stag", "Rat", "Dog", "Cat"],
       correct: "Stag",
-      img: "<img id='pic' src='assets/images/prongs.jpg'/>"
+      img: "<img id='img' src='assets/images/prongs.jpg'/>"
     },
     {
       question: "Who was the half-blood prince?",
@@ -69,7 +69,7 @@ $(document).ready(function() {
         "Severus Snape"
       ],
       correct: "Severus Snape",
-      img: "<img id='pic' src='assets/images/snape.jpg'/>"
+      img: "<img id='img' src='assets/images/snape.jpg'/>"
     },
     {
       question: "What newspaper does Luna Lovegood's dad edit?",
@@ -80,13 +80,13 @@ $(document).ready(function() {
         "Diagon Alley News"
       ],
       correct: "The Quibbler",
-      img: "<img id='pic' src='assets/images/quibbler.jpg'/>"
+      img: "<img id='img' src='assets/images/quibbler.jpg'/>"
     },
     {
       question: "Which of the following is not a Weasley?",
       options: ["Frank", "Molly", "Bill", "Charlie"],
       correct: "Frank",
-      img: "<img id='pic' src='assets/images/weasley.jpg'/>"
+      img: "<img id='img' src='assets/images/weasley.jpg'/>"
     }
   ];
 
@@ -182,13 +182,14 @@ $(document).ready(function() {
   function countdown() {
     if (timeLeft === 0) {
       clearInterval(timerId);
+      elem.innerHTML = timeLeft + " seconds remaining"; 
       ranOutOfTime();
     } else {
       elem.innerHTML = timeLeft + " seconds remaining";
       timeLeft--;
     }
   }
-  //function to display when the user runs out of time.  It should stop the timer, hide the buttons, display a picture and and let them know they ran out of time and what the correct answer was.
+  //function to display when the user runs out of time.  It should stop the timer, hide the buttons, display a imgture and and let them know they ran out of time and what the correct answer was.
   function ranOutOfTime() {
     clearInterval(timerId);
     $("#a").hide();
@@ -200,7 +201,8 @@ $(document).ready(function() {
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#pic").replaceWith(currentQuestion[questionNumber].img);
+    // $("#img").show();
+    $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
     timedOut++;
     setTimeout(nextQuestion, 4000);
@@ -220,7 +222,8 @@ $(document).ready(function() {
     $("#c").hide();
     $("#d").hide();
     $("#question").text("CORRECT!");
-    $("#pic").replaceWith(currentQuestion[questionNumber].img);
+    // $("#img").show();
+    $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
     console.log("correct" + questionNumber);
     right++;
@@ -239,17 +242,18 @@ $(document).ready(function() {
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#pic").html(currentQuestion[questionNumber].img);
+    // $("#img").show();
+    $("#img").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
     wrong++;
     setTimeout(nextQuestion, 4000);
   }
 
-  // This function should hide the old picture and bring up the next question and answers.
+  // This function should hide the old imgture and bring up the next question and answers.
   function nextQuestion() {
     if (questionNumber < 10) {
       console.log("nextQuestion" + questionNumber);
-      $("#pic").empty();
+      $("#img").hide();
       $("#t").show();
       $("#timer").show();
       timeLeft = 3;
