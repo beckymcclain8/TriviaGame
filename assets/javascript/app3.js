@@ -5,30 +5,31 @@ $(document).ready(function() {
   var wrong = 0;
   var timedOut = 0;
 
+  //Array of objects holding questions, answer options, correct answer, and the image to be displayed.
   currentQuestion = [
     {
       question: "What kind of pet does Harry take to school?",
       options: ["Frog", "Cat", "Owl", "Snake"],
       correct: "Owl",
-      img: "<img src='assets/images/Hedwig.jpg'/>"
+      img: "<img id='pic' src='assets/images/Hedwig.jpg'/>"
     },
     {
       question: "What position does Harry play on the quidditch team?",
       options: ["Seeker", "Chaser", "Beater", "Bludger"],
       correct: "Seeker",
-      img: "<img src='assets/images/seeker.png'/>"
+      img: "<img id='pic' src='assets/images/seeker.png'/>"
     },
     {
       question: "Which of the following was not a pet of Hagrid's",
       options: ["Norbert", "Chester", "Fang", "Buckbeak"],
       correct: "Chester",
-      img: "<img src='assets/images/buckbeak.jpg'/>"
+      img: "<img id='pic' src='assets/images/buckbeak.jpg'/>"
     },
     {
       question: "What article of clothing frees Dobby from the Malfoys?",
       options: ["Shirt", "Scarf", "Sock", "Sweater"],
       correct: "Sock",
-      img: "<img src='assets/images/dobby.jpg'/>"
+      img: "<img id='pic' src='assets/images/dobby.jpg'/>"
     },
     {
       question: "Who drives the Knight Bus?",
@@ -39,7 +40,7 @@ $(document).ready(function() {
         "Stan Shunpike"
       ],
       correct: "Stan Shunpike",
-      img: "<img src='assets/images/stan.jpg'/>"
+      img: "<img id='pic' src='assets/images/stan.jpg'/>"
     },
     {
       question:
@@ -51,13 +52,13 @@ $(document).ready(function() {
         "Chinese Fireball"
       ],
       correct: "Hungarian Horntail",
-      img: "<img src='assets/images/hungarian.jpg'/>"
+      img: "<img id='pic' src='assets/images/hungarian.jpg'/>"
     },
     {
       question: "What was James Potter's animagus?",
       options: ["Stag", "Rat", "Dog", "Cat"],
       correct: "Stag",
-      img: "<img src='assets/images/prongs.jpg'/>"
+      img: "<img id='pic' src='assets/images/prongs.jpg'/>"
     },
     {
       question: "Who was the half-blood prince?",
@@ -68,7 +69,7 @@ $(document).ready(function() {
         "Severus Snape"
       ],
       correct: "Severus Snape",
-      img: "<img src='assets/images/snape.jpg'/>"
+      img: "<img id='pic' src='assets/images/snape.jpg'/>"
     },
     {
       question: "What newspaper does Luna Lovegood's dad edit?",
@@ -79,16 +80,17 @@ $(document).ready(function() {
         "Diagon Alley News"
       ],
       correct: "The Quibbler",
-      img: "<img src='assets/images/quibbler.jpg'/>"
+      img: "<img id='pic' src='assets/images/quibbler.jpg'/>"
     },
     {
       question: "Which of the following is not a Weasley?",
       options: ["Frank", "Molly", "Bill", "Charlie"],
       correct: "Frank",
-      img: "<img src='assets/images/weasley.jpg'/>"
+      img: "<img id='pic' src='assets/images/weasley.jpg'/>"
     }
   ];
 
+  //opening screen
   function startGame() {
     $("#t").hide();
     $("#question").hide();
@@ -100,10 +102,12 @@ $(document).ready(function() {
     clearInterval(timerId);
   }
 
+  //Once the user clicks start, the first question and answers will be displayed
   $("#start").on("click", function() {
     $("#start").hide();
     $("#t").show();
     $("#timer").show();
+    timerId = setInterval(countdown, 1000);
     countdown();
     $("#question").show();
     $("#question").text(currentQuestion[questionNumber].question);
@@ -117,6 +121,7 @@ $(document).ready(function() {
     $("#d").html(currentQuestion[questionNumber].options[3]);
   });
 
+  //if "a" is clicked stop the time, decide if it's right or wrong (same thing repeated for each button option)
   $("#a").on("click", function() {
     clearInterval(timerId);
     stopTimer();
@@ -161,13 +166,31 @@ $(document).ready(function() {
     }
   });
 
-  // setTimeout(checkWin, 5000);
-
+  //timer countdown
   var timeLeft = 3;
+  //grabbing the DOM element "timer" and saving it as a variable
   var elem = document.getElementById("timer");
-  var timerId = setInterval(countdown, 1000);
+  //creating and setting a variable called timerId so that I can stop it and start it later
+  var timerId;
+  
 
+  // function count() {
+  //   timeLeft--;
+  // }
+
+  //countDown function for the timer... if timeLeft === 0 it should stop the clock and run "ran out of time" function, otherwise it should subtract a second from timeLeft, updating the DOM.
+  function countdown() {
+    if (timeLeft === 0) {
+      clearInterval(timerId);
+      ranOutOfTime();
+    } else {
+      elem.innerHTML = timeLeft + " seconds remaining";
+      timeLeft--;
+    }
+  }
+  //function to display when the user runs out of time.  It should stop the timer, hide the buttons, display a picture and and let them know they ran out of time and what the correct answer was.
   function ranOutOfTime() {
+    clearInterval(timerId);
     $("#a").hide();
     $("#b").hide();
     $("#c").hide();
@@ -177,31 +200,36 @@ $(document).ready(function() {
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#img").replaceWith(currentQuestion[questionNumber].img);
+    $("#pic").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
     timedOut++;
     setTimeout(nextQuestion, 4000);
   }
 
+  //this function hides the timer during the "correct/incorrect/out of time" update
   function stopTimer() {
     $("#t").hide();
     $("#timer").hide();
   }
 
+  //function to display when the user answers correctly.
   function correct() {
+    clearInterval(timerId);
     $("#a").hide();
     $("#b").hide();
     $("#c").hide();
     $("#d").hide();
     $("#question").text("CORRECT!");
-    $("#img").replaceWith(currentQuestion[questionNumber].img);
+    $("#pic").replaceWith(currentQuestion[questionNumber].img);
     questionNumber++;
-    console.log("correct" + questionNumber)
+    console.log("correct" + questionNumber);
     right++;
     setTimeout(nextQuestion, 4000);
   }
 
+  //functiuon to display when the user answers incorrectly.
   function incorrect() {
+    clearInterval(timerId);
     $("#a").hide();
     $("#b").hide();
     $("#c").hide();
@@ -211,22 +239,21 @@ $(document).ready(function() {
         currentQuestion[questionNumber].correct +
         "!"
     );
-    $("#img").html(currentQuestion[questionNumber].img);
-    questionNumber ++;
+    $("#pic").html(currentQuestion[questionNumber].img);
+    questionNumber++;
     wrong++;
     setTimeout(nextQuestion, 4000);
   }
-  // console.log("correct" + correct)
-  // console.log("wrong" + wrong);
-  // console.log("questionNumber" + questionNumber);
 
+  // This function should hide the old picture and bring up the next question and answers.
   function nextQuestion() {
     if (questionNumber < 10) {
-      console.log("nextQuestion" + questionNumber)
-      $("#img").hide();
+      console.log("nextQuestion" + questionNumber);
+      $("#pic").empty();
       $("#t").show();
       $("#timer").show();
       timeLeft = 3;
+      timerId = setInterval(countdown, 1000);
       countdown();
       $("#question").show();
       for (i = 0; i < 10; i++) {
@@ -245,16 +272,8 @@ $(document).ready(function() {
       results();
     }
   }
-  function countdown() {
-    if (timeLeft == 0) {
-      clearTimeout(timerId);
-      ranOutOfTime();
-    } else {
-      elem.innerHTML = timeLeft + " seconds remaining";
-      timeLeft--;
-    }
-  }
 
+  //This function displays the results of the game along with a button to restart the game.
   function results() {
     $("#img").hide();
     $("#question").hide();
@@ -275,8 +294,17 @@ $(document).ready(function() {
         timedOut +
         "</p>" +
         "<br>" +
-        "<div>'restart button'</div>"
+        "<btn>'Restart The Game'</btn>"
     );
+  }
+
+  //function to retart the game.  Resets variables to 0 and runs the "startGame" function
+  function restartButton() {
+    var questionNumber = 0;
+    var right = 0;
+    var wrong = 0;
+    var timedOut = 0;
+    startGame();
   }
 
   startGame();

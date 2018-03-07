@@ -2,3 +2,16 @@ img {
     width: 300px;
     height: auto;
 }
+
+body {
+    background-image: url(../images/harry.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+#page-wrap {
+    width: 800px;
+    margin: 0 auto;
+}
+
