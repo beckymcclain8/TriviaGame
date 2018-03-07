@@ -21,9 +21,9 @@ $(document).ready(function() {
     },
     {
       question: "Which of the following was not a pet of Hagrid's",
-      options: ["Norbert", "Chester", "Fang", "Buckbeak"],
-      correct: "Chester",
-      img: "<img id='img' src='assets/images/buckbeak.jpg'/>"
+      options: ["Norbert", "Mrs. Norris", "Fang", "Buckbeak"],
+      correct: "Mrs. Norris",
+      img: "<img id='img' src='assets/images/norris.jpg'/>"
     },
     {
       question: "What article of clothing frees Dobby from the Malfoys?",
@@ -94,11 +94,11 @@ $(document).ready(function() {
   function startGame() {
     $("#t").hide();
     $("#question").hide();
-    $("#start").html("start");
     $("#a").hide();
     $("#b").hide();
     $("#c").hide();
     $("#d").hide();
+    $("#restart").hide();
     clearInterval(timerId);
   }
 
@@ -167,12 +167,11 @@ $(document).ready(function() {
   });
 
   //timer countdown
-  var timeLeft = 3;
+  var timeLeft = 10;
   //grabbing the DOM element "timer" and saving it as a variable
   var elem = document.getElementById("timer");
   //creating and setting a variable called timerId so that I can stop it and start it later
   var timerId;
-  
 
   // function count() {
   //   timeLeft--;
@@ -182,7 +181,7 @@ $(document).ready(function() {
   function countdown() {
     if (timeLeft === 0) {
       clearInterval(timerId);
-      elem.innerHTML = timeLeft + " seconds remaining"; 
+      elem.innerHTML = timeLeft + " seconds remaining";
       ranOutOfTime();
     } else {
       elem.innerHTML = timeLeft + " seconds remaining";
@@ -256,7 +255,7 @@ $(document).ready(function() {
       $("#img").hide();
       $("#t").show();
       $("#timer").show();
-      timeLeft = 3;
+      timeLeft = 10;
       timerId = setInterval(countdown, 1000);
       countdown();
       $("#question").show();
@@ -276,9 +275,11 @@ $(document).ready(function() {
       results();
     }
   }
-
+  // var restart;
+  // restart = $("<btn>").html("Restart the Game");
   //This function displays the results of the game along with a button to restart the game.
   function results() {
+    $("#restart").show();
     $("#img").hide();
     $("#question").hide();
     $("#a").hide();
@@ -294,22 +295,24 @@ $(document).ready(function() {
         wrong +
         "</p>" +
         "<br>" +
-        "<p>Ran out of time on: " +
+        "<p>Ran out of time: " +
         timedOut +
         "</p>" +
-        "<br>" +
-        "<btn>'Restart The Game'</btn>"
+        "<br>"
     );
   }
 
   //function to retart the game.  Resets variables to 0 and runs the "startGame" function
-  function restartButton() {
-    var questionNumber = 0;
-    var right = 0;
-    var wrong = 0;
-    var timedOut = 0;
+  $("#restart").on("click", function() {
+    $("#results").hide();
+    $("restart").hide();
+    $("#start").show();
+    questionNumber = 0;
+    right = 0;
+    wrong = 0;
+    timedOut = 0;
     startGame();
-  }
+  });
 
   startGame();
 });

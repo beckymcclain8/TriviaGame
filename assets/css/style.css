@@ -1,17 +1,47 @@
 img {
-    width: 300px;
-    height: auto;
+  width: 300px;
+  height: auto;
 }
 
 body {
-    background-image: url(../images/harry.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    color: white;
+  background-image: url(../images/harry.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color:  white;
 }
+
+/* .container {
+  background-color: rgba(248, 240, 240, 0.2);
+  color: black;
+} */
 
 #page-wrap {
-    width: 800px;
-    margin: 0 auto;
+  width: 800px;
+  margin: 0 auto;
 }
 
+#question {
+  font-size: x-large;
+}
+
+@media screen and (min-width: 350px) and (max-width: 1250px) {
+  /* body {
+    background-image: none;
+    background-color: black;
+  } */
+
+  .container {
+    background-color: rgba(248, 240, 240, 0.5);
+    color: black;
+  }
+
+  img {
+    width: 200px;
+    height: auto;
+  }
+
+  #question {
+    font-size: medium;
+    font-weight: bold;
+  }
+}

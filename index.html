@@ -8,46 +8,52 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link href="assets/css/style.css" type="text/css" rel="stylesheet">
-    
+
     <title>Harry Potter Trivia</title>
 </head>
 
 <body>
-        <div id= "page-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Harry Potter Trivia!</h1>
+    <div id="page-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Harry Potter Trivia!</h1>
 
-                <h3>Click the correct answer to move on to the next question...</h3>
-                <h3>Be careful, there's not much time!</h3>
+                    <h3>Click the correct answer to move on to the next question...</h3>
+                    <h3>Be careful, there's not much time!</h3>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div id="time">
-                    <p id="t">Time Remaining: <span id="timer"></span></p>
+            <div class="row">
+                <div class="col-sm-4 col-md-8 col-lg-12">
+                    <div id="time">
+                        <p id="t">Time Remaining:
+                            <span id="timer"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row" id="box">
+                <div class="col-sm-4 col-md-6 col-lg-12">
+                    <div id="question"></div>
+                    <div id="results"></div>
+                    <br>
+                    <div id="img"></div>
+                    <br>
+                    <div id="answers">
+                        <button type="button" id="start" class="btn btn-light">Start</button>
+                        <button type="button" id="a" class="btn btn-light"></button>
+                        <button type="button" id="b" class="btn btn-light"></button>
+                        <button type="button" id="c" class="btn btn-light"></button>
+                        <button type="button" id="d" class="btn btn-light"></button>
+                        <button type="button" id="restart" class="btn btn-light">Restart</button>
+                        <br>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="box">
-            <div class="col-md-6 col-lg-12">
-                <div id="question"></div>
-                <div id="results"></div>
-                <br>
-                <div id="img"></div>
-                <br>
-                <div id="answers">
-                    <button type="button" id= "start" class="btn btn-outline-light"></button>
-                    <button type="button" id= "a" class="btn btn-outline-light"></button>
-                    <button type="button" id= "b" class="btn btn-outline-light"></button>
-                    <button type="button" id= "c" class="btn btn-outline-light"></button>
-                    <button type="button" id= "d" class="btn btn-outline-light"></button>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
     <script src="assets/javascript/app3.js"></script>
 </body>
